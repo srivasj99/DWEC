@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Mochiy+Pop+P+One&display=swap");
+/*VARIABLES*/
+* {
+  box-sizing: border-box;
+  font-family: "Mochiy Pop P One", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+h1 {
+  font-size: 3.6rem;
+  text-align: center;
+}
+
+h1::before {
+  content: "JUEGO DE CARTAS";
+}
+
+h2 {
+  text-align: center;
+}
+
+p {
+  font-size: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#usuario, #jugadorTop {
+  font-family: "Comfortaa", cursive;
+  font-weight: 700;
+}
+
+span {
+  font-weight: 700;
+}
+
+span#errores, span#contador {
+  font-family: "Comfortaa", cursive;
+  font-weight: 400;
+}
+
+table {
+  font-size: 2.4rem;
+}
+
+body {
+  background-color: #325288;
+}
+
+.idioma {
+  background-color: transparent;
+  color: #FAEEE7;
+  border: none;
+  cursor: pointer;
+}
+
+.idioma:hover {
+  font-weight: 700;
+}
+
+.marcador {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 90%;
+  text-transform: uppercase;
+  margin: 20px auto;
+}
+
+.marcador#estadisticas {
+  width: 100%;
+}
+
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 200px);
+  gap: 10px;
+  width: 100%;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .contenedor-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 200px);
+    gap: 10px;
+    width: 100%;
+    margin: 10px;
+  }
+
+  h1:before {
+    content: "JUEGO DE CARTAS";
+  }
+}
+@media (max-width: 480px) {
+  .contenedor-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 200px);
+    gap: 10px;
+    width: 100%;
+    margin: 10px;
+  }
+
+  .aside__lateral {
+    display: none;
+  }
+
+  h1:before {
+    content: "JC";
+  }
+
+  .marcador {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 50%, 50%;
+  }
+
+  #tablaJugador {
+    grid-column: 1/2;
+    font-size: 1.2rem;
+  }
+
+  #tablaJugadorTop {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    font-size: 1.2rem;
+  }
+
+  #tablaLenguaje {
+    font-size: 1.2rem;
+  }
+}
+.carta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../img/cara-trasera.jpg);
+  background-size: cover;
+  box-shadow: 6px 6px 15px 0px #d962d9;
+}
+
+img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.header__cabecera {
+  display: flex;
+  background-image: url(../img/cielo.jpg);
+  position: relative;
+}
+
+.header__cabecera img {
+  width: 100px;
+  height: 120px;
+  justify-content: flex-start;
+}
+
+.header__cabecera h1 {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translateY(-50%);
+}
+
+table, tr, th, td {
+  font-family: "Comfortaa", cursive;
+  border: 1px solid #D96098;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 5px;
+  color: #FAEEE7;
+  font-weight: 300;
+}
+
+.contenedor {
+  background-color: #325288;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.aside__lateral {
+  flex: 1 0 200px;
+  color: #FAEEE7;
+  background-color: #325288;
+}
+
+@media (min-width: 768px) {
+  .contenedor {
+    flex-direction: row;
+  }
+}
+.aside__lateral p {
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+}
+
+.barra-informativa {
+  border: 1px solid #D96098;
+  background-color: #325288;
+  color: #FAEEE7;
+  width: 90%;
+  margin: auto;
+}
+
+.barra-informativa p {
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+}
+
+.footer {
+  margin-top: 10px;
+  background: #00a8ff;
+  background: linear-gradient(90deg, #00a8ff 0%, #1658a2 51%, #00d4ff 100%);
+  padding: 1px;
+  color: #FAEEE7;
+}
+
+.footer p {
+  font-family: "Comfortaa", cursive;
+  font-weight: 300;
+}/*# sourceMappingURL=samuel.css.map */
