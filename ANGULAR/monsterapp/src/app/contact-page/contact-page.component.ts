@@ -9,6 +9,7 @@ export class ContactPageComponent implements OnInit {
   contacto:string = "Contacto"
   nombre:string = "Samuel"
   apellidos:string = "Rivas Jimenez"
+  repositorio:string = "https://github.com/srivasj99/DWEC_Monsterapp";
 
   constructor() { }
 
