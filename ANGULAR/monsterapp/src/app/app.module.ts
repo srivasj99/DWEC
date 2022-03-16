@@ -12,7 +12,8 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 
 const appRoutes:Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'users', component: UserPageComponent}
+  {path: 'users', component: UserPageComponent},
+  {path: 'contact', component: ContactPageComponent}
 ];
 
 
