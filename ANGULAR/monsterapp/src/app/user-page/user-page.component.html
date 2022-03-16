@@ -1,0 +1,23 @@
+<div *ngIf="users">
+  <ul>
+    <div *ngFor="let u of users.data">
+      <li>id: {{u.id}}</li>
+      <li>Email: {{u.email}}</li>
+      <li>First Name: {{u.first_name}}</li>
+      <li>Last Name: {{u.last_name}}</li>
+      <li><img src="{{u.avatar}}" alt="Imagen usuario"></li>
+    </div>
+  </ul>
+</div>
+
+
+<div *ngIf="resources">
+  <ul>
+    <div *ngFor="let r of resources.data">
+      <li>id: {{r.id}}</li>
+      <li>Nombre: {{r.name}}</li>
+      <li>Año: {{r.year}}</li>
+      <li [ngStyle]="{'color': r.color}">Color: {{r.color}}</li>
+    </div>
+  </ul>
+</div>

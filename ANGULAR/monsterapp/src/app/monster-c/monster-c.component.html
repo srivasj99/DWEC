@@ -1,0 +1,4 @@
+<ul class="list-group">
+  <li class="list-group-item list-group-item-primary mb-3" *ngIf="monsterEnviado.raza == 'Enano' || monsterEnviado.raza == 'Elfo' ">Nombre: {{monsterEnviado.nombre}} -- Vida: {{monsterEnviado.vida}} -- Ataque: <span class="badge bg-dark">{{monsterEnviado.ataque}}</span> -- Raza: {{monsterEnviado.raza}}</li>
+  <li class="list-group-item list-group-item-warning mb-3" *ngIf="monsterEnviado.raza == 'Orco' || monsterEnviado.raza == 'Trasgo' ">Nombre: {{monsterEnviado.nombre}} -- Vida: {{monsterEnviado.vida}} -- Ataque: <span class="badge bg-dark">{{monsterEnviado.ataque}}</span> -- Raza: {{monsterEnviado.raza}}</li>
+</ul>

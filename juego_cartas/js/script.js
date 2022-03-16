@@ -1,24 +1,24 @@
-var contadorClicks = 0;
-var cont = document.getElementById("contador");
-var errores = document.getElementById("errores");
-var cartasSeleccionadas = new Array();
+let contadorClicks = 0;
+let cont = document.getElementById("contador");
+let errores = document.getElementById("errores");
+let cartasSeleccionadas = new Array();
 let cartas = document.querySelectorAll(".carta");
-var imagen;
+let imagen;
 let matchMessage;
 let errorMessage;
 let win;
 let errors;
 
 //creamos el array de cartas
-let opciones = ["bart", "lisa", "bart", "maggie", "maggie", "homer", "flanders", "lisa", "flanders", "marge", "marge", "homer"];
-let arrayOpciones = opciones.sort(function () { return Math.random() - 0.5 });
+const opciones = ["bart", "lisa", "bart", "maggie", "maggie", "homer", "flanders", "lisa", "flanders", "marge", "marge", "homer"];
+const arrayOpciones = opciones.sort(function () { return Math.random() - 0.5 });
 
 //ponemos el idioma, si ya hay almacenado uno, sino por defecto español
 window.onload = function init(){
     if (localStorage.getItem("idioma") != null) {
-        cambiaTexto("",localStorage.getItem("idioma"));
+        cargarDocumentoJSON(localStorage.getItem("idioma"));
     } else {
-        cambiaTexto("","esp");
+        cargarDocumentoJSON("esp");
     }
 }
 
@@ -27,10 +27,10 @@ for (let i = 0; i < arrayOpciones.length; i++) {
     cartas[i].setAttribute("name", arrayOpciones[i]);
 }
 //DATOS USUARIO
-/*do {
+do {
     usuario = prompt("Introduce tu nombre de usuario",)
 } while (usuario === "" || usuario == null)
-let etiquetaUsuario = document.getElementById("usuario").innerHTML = usuario;*/
+let etiquetaUsuario = document.getElementById("usuario").innerHTML = usuario;
 
 //Top player
 let filaError = document.getElementById("jugadorTopFilaError")
@@ -50,7 +50,6 @@ for (carta of cartas) {
 function mostrarImagenes(evt) {
     contadorClicks++;
     let carta = evt.target;
-    console.log(carta);
     if (carta != null) {
         /*let carta = contenidoCarta.parentElement;*/
         let idCarta = carta.getAttribute("name");
@@ -103,8 +102,9 @@ function comprobarIguales(arraySeleccionados) {
     if (arraySeleccionados[0].getAttribute("name") == arraySeleccionados[1].getAttribute("name")) {
         arraySeleccionados.forEach(element => {
             element.style.border = "3px solid green"
-            barraInformativa.innerHTML = matchMessage;
-
+            if(matchMessage != ""){
+                barraInformativa.innerHTML = matchMessage;
+            }
         });
 
         checkTotal()
@@ -184,21 +184,43 @@ function cambiaIdioma(evt) {
     } else {
         if (idiomaClick == "eng") {
             localStorage.setItem("idioma", "eng");
-            cargarDocumentoXML(idiomaClick);
-            cargarDocumentoTXT(idiomaClick)
+            /**cargarDocumentoXML(idiomaClick);
+            cargarDocumentoTXT(idiomaClick)*/
+            cargarDocumentoJSON(idiomaClick)
             evt.target.style.fontWeight = "bold";
             document.getElementById("esp").style.fontWeight = "normal";
         } else {
             localStorage.setItem("idioma", "esp");
-            cargarDocumentoXML(idiomaClick);
-            cargarDocumentoTXT(idiomaClick)
+           /* cargarDocumentoXML(idiomaClick);
+            cargarDocumentoTXT(idiomaClick)*/
+            cargarDocumentoJSON(idiomaClick)
             evt.target.style.fontWeight = "bold";
             document.getElementById("eng").style.fontWeight = "normal";
         }
     }
 }
-function cambiaTexto(xml, idioma) {
-    if(xml != ""){
+function cambiaTexto(json, idioma) {
+
+    let lenguaje;
+
+    if(idioma == "esp"){
+        lenguaje = "esp"
+    }else{
+        lenguaje = "eng"
+    }
+
+    document.getElementById("tagPuntuacion").innerHTML = json.lang[lenguaje].score
+    document.getElementById("tagErrores").innerHTML = json.lang[lenguaje].errors
+    document.getElementById("tagJugadorTop").innerHTML = json.lang[lenguaje].topPlayer
+    document.getElementById("tagErroresTop").innerHTML = json.lang[lenguaje].errors
+    document.querySelector(".aside__lateral > #titulo_aside").innerHTML = json.lang[lenguaje].titleDescription
+    document.querySelector(".aside__lateral > p").innerHTML = json.lang[lenguaje].gameDescription
+            
+    win = json.lang[lenguaje].win
+    matchMessage = json.lang[lenguaje].matchMessage
+    errorMessage = json.lang[lenguaje].errorMessage
+    errors = json.lang[lenguaje].errors
+    /**if(xml != ""){
         let xmlDoc = xml.responseXML;
         let lenguaje = xmlDoc.getElementsByTagName(idioma);
         let valores = new Array();
@@ -206,28 +228,19 @@ function cambiaTexto(xml, idioma) {
             valores = Array.from(lenguaje[i].children);
         }
     
-        if(idioma == "eng"){
+        
             document.getElementById("tagPuntuacion").innerHTML = valores[0].textContent;
             document.getElementById("tagErrores").innerHTML = valores[1].textContent;
             document.getElementById("tagJugadorTop").innerHTML = valores[2].textContent;
             document.getElementById("tagErroresTop").innerHTML = valores[1].textContent;
-            document.querySelector(".aside__lateral > #titulo_aside").innerHTML = "How to Play?"
+            document.querySelector(".aside__lateral > #titulo_aside").innerHTML = valores[6].textContent;
             
             win = valores[5].textContent;
             matchMessage = valores[3].textContent;
             errorMessage = valores[4].textContent;
             errors = valores[1].textContent;
-        }else if(idioma == "esp"){
-            document.getElementById("tagPuntuacion").innerHTML = valores[0].textContent;
-            document.getElementById("tagErrores").innerHTML = valores[1].textContent;
-            document.getElementById("tagJugadorTop").innerHTML = valores[2].textContent;
-            document.getElementById("tagErroresTop").innerHTML = valores[1].textContent;
-            document.querySelector(".aside__lateral > #titulo_aside").innerHTML = "¿Como jugar?"
-            win = valores[5].textContent;
-            matchMessage = valores[3].textContent;
-            errorMessage = valores[4].textContent;
-        }
-    }
+        
+    }**/
 
     /* if (idioma == "eng") {
          document.getElementById("tagPuntuacion").innerHTML = "Score";
@@ -265,6 +278,20 @@ function cargarDocumentoTXT(idioma) {
     }else{
         xhttp.open("GET", "descripcion_en.txt", true);
     }
+    xhttp.send();
+}
+
+function cargarDocumentoJSON(idioma) {
+    var xhttp = new XMLHttpRequest();
+    var url = "lang.txt"
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var json = JSON.parse(this.responseText);
+            cambiaTexto(json, idioma);
+        }
+    };
+    
+        xhttp.open("GET", url, true);
     xhttp.send();
 }
 

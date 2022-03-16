@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="text-center">{{title}}</h1>
+  <input type="text" class="form-control mb-3" name="nombre" [(ngModel)]="nombreMonstruo" placeholder="nombre">
+  <input type="number" class="form-control mb-3" name="vida" [(ngModel)]="vidaMonstruo" placeholder="vida">
+  <input type="number" class="form-control mb-3" name="ataque" [(ngModel)]="ataqueMonstruo" placeholder="ataque">
+  <select name="raza" class="form-select mb-3" [(ngModel)]="razaMonstruo">
+    <option value="" disabled selected>Seleccione una raza</option>
+    <option value="Orco">Orco</option>
+    <option value="Enano">Enano</option>
+    <option value="Trasgo">Trasgo</option>
+    <option value="Elfo">Elfo</option>
+  </select>
+  <button type="button" class="btn btn-primary w-100 mb-3" (click)="addMonster1()">Insertar</button><br>
+  <div *ngIf="msg != ''">
+    <p> {{msg}} </p>
+  </div>
+  <div *ngIf="misMonstruos.length == 0">
+      <p class="alert alert-danger">No hay mounstros</p>
+  </div>
+  <app-monster-c *ngFor="let monstruo of misMonstruos" [monsterEnviado]="monstruo"></app-monster-c>
+</div>

@@ -1,0 +1,10 @@
+instalar git
+instalar nodejs
+instalar nvm para windows
+instalar extension visual angular essentials
+instalar extension debugger firefox
+npm install -g @angular/cli
+ng --version //vemos si se ha instalado
+ng new primer_proyecto // crear proyecto
+ng serve -o //iniciar proyecto
+	si da error en powershell (admin) Set-ExecutionPolicy RemoteSigned -Force
